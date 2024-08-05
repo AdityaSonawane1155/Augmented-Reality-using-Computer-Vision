@@ -8,3 +8,18 @@ The goal is to develop an algorithm capable of detecting ArUco markers in the im
 3. Defining ArUco Dictionary and Parameters: • aruco dict =cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT 6X6 250): Here, an ArUcodictionary is initialized using the function cv2.aruco.getPredefinedDictionary(). The dictionary type chosen is cv2.aruco.DICT 6X6 250, which specifies a dictionary of 6x6 ArUco markers with 250 unique IDs. • parameters = cv2.aruco.DetectorParameters(): Detector parameters are defined using the cv2.aruco.DetectorParameters() function. These parameters control the behavior of the ArUco marker detection algorithm, such as corner refinement and marker size thresholds.
 
 4. Detecting Markers: • corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco dict, parameters=parameters): ArUco markers are detected in the grayscale image (gray) using the cv2.aruco.detectMarkers() function. This function returns the corners of detected markers (corners), their corresponding IDs (ids), and rejected points (rejectedImgPoints).
+![Screenshot 2024-08-05 144110](https://github.com/user-attachments/assets/ed49b6e1-99e8-4291-b0a7-0e1a29add78b)
+5. Loading the Replacement Image: • replacement image = cv2.imread(‘images/overlay image.jpg’): Another im age, named ‘overlay image.jpg’, is loaded from the ’images’ folder using cv2.imread(). This image will be overlaid onto the detected markers.
+
+6. Calculating Replacement Image Dimensions: • replacement height, replacement width = replacement image.shape[:2]: The height and width of the replacement image are obtained using the shape at tribute of the NumPy array representing the image.
+
+7. Defining a Scale Factor: • scale factor = 6: A scale factor is defined to adjust the size of the replacement image relative to the size of the detected markers. This factor determines how much the replacement image will be enlarged.
+
+8. Iterating Through Detected Markers: • for i in range(len(ids)):: A loop iterates through each detected marker. The subsequent lines within the loop perform the following tasks: • Computing New Corner Points: The corner points of the detected marker are used to compute new corner points for enlarging the replacement image based on the scale factor.
+• Performing Perspective Transformation: A perspective transformation is applied to the replacement image to align it with the detected marker using cv2.getPerspectiveTransform() and cv2.warpPerspective().
+
+• Creating a Mask: A mask is created to define the region of interest for blending the replacement image with the original image.
+![Screenshot 2024-08-05 144142](https://github.com/user-attachments/assets/5cd0c782-cf4c-40bb-b981-4b2ea640b06f)
+• Blending Images: The replacement image is combined with the original image using bitwise operations (cv2.bitwise and() and cv2.bitwise or()) to overlay it on the detected marker.
+![Screenshot 2024-08-05 144157](https://github.com/user-attachments/assets/a0851fb3-6065-4f2a-8ad4-15bfecc4b238)
+Finally, the processed image with overlaid ArUco markers is displayed in a window using cv2.imshow(), and the program waits for a key press before closing the window using cv2.waitKey() and cv2.destroyAllWindows().
