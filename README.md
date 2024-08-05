@@ -20,6 +20,7 @@ The goal is to develop an algorithm capable of detecting ArUco markers in the im
 
 • Creating a Mask: A mask is created to define the region of interest for blending the replacement image with the original image.
 ![Screenshot 2024-08-05 144142](https://github.com/user-attachments/assets/5cd0c782-cf4c-40bb-b981-4b2ea640b06f)
+
 • Blending Images: The replacement image is combined with the original image using bitwise operations (cv2.bitwise and() and cv2.bitwise or()) to overlay it on the detected marker.
 ![Screenshot 2024-08-05 144157](https://github.com/user-attachments/assets/a0851fb3-6065-4f2a-8ad4-15bfecc4b238)
 Finally, the processed image with overlaid ArUco markers is displayed in a window using cv2.imshow(), and the program waits for a key press before closing the window using cv2.waitKey() and cv2.destroyAllWindows().
